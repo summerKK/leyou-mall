@@ -7,14 +7,15 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
-    registry-fetch-interval-seconds: 5
+    registry-fetch-interval-seconds: 5 # 拉取服务间隔
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
     instance-id: ${spring.application.name}:${server.port}
 zuul:
   prefix: /api # 添加路由前缀
-  retryable: true
+  routes:
+    item-service: /item/**
 ribbon:
   ConnectTimeout: 1000 # 连接超时时间(ms)
   ReadTimeout: 3500 # 通信超时时间(ms)
