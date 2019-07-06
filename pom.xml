@@ -11,6 +11,7 @@
         <module>eureka-registry</module>
         <module>zuul-gateway</module>
         <module>item</module>
+        <module>common</module>
     </modules>
     <packaging>pom</packaging>
 
