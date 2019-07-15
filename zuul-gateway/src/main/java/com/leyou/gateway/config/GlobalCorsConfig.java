@@ -1,5 +1,6 @@
 package com.leyou.gateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -9,11 +10,14 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class GlobalCorsConfig {
 
+    @Value("${leyou.domain}")
+    private String domain;
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         // 1) 允许的域,不要写*，否则cookie就无法使用了
-        config.addAllowedOrigin("http://manage.leyou.work");
+        config.addAllowedOrigin(this.domain);
         // 2) 是否发送Cookie信息
         config.setAllowCredentials(true);
         // 3) 允许的请求方式

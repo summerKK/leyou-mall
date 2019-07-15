@@ -28,3 +28,5 @@ hystrix:
         isolation:
           thread:
             timeoutInMillisecond: 5000 # 熔断超时时长：5000ms
+leyou:
+  domain: http://manage.leyou.work
