@@ -40,6 +40,14 @@ http {
         proxy_set_header X-Forwarded-Host $host;
         proxy_set_header X-Forwarded-Server $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        
+        location /api/upload{
+            proxy_pass http://127.0.0.1:8082;
+			proxy_connect_timeout 600;
+			proxy_read_timeout 600;
+			
+			rewrite "^/api/(.*)$" /$1 break;
+        }
 
         location / {
 			proxy_pass http://127.0.0.1:10010;

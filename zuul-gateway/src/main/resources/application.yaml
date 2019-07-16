@@ -16,6 +16,8 @@ zuul:
   prefix: /api # 添加路由前缀
   routes:
     item-service: /item/**
+  ignored-services:
+    - upload-service # 忽略upload-service服务
 ribbon:
   ConnectTimeout: 1000 # 连接超时时间(ms)
   ReadTimeout: 3500 # 通信超时时间(ms)
