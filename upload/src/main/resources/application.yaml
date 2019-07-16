@@ -20,5 +20,5 @@ leyou:
   image:
     upload:
       dir: /Users/summer/Docker/java/leyou/upload/uploadDIr/
-      domain: http://image.leyou.work/upload/
+      domain: http://image.leyou.work/
   domain: http://manage.leyou.work

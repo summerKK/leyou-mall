@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,9 +32,21 @@ public class BrandController {
         return ResponseEntity.ok(brandService.list(name, desc, page, perPage, sortBy));
     }
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> saveBrand(Brand brand, @RequestParam("cids") List<Long> cids) {
         brandService.saveBrand(brand, cids);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<Void> editBrand(Brand brand, @RequestParam("cids") List<Long> cids) {
+        brandService.editBrand(brand, cids);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteBrand(@RequestParam("id") Long id) {
+        brandService.deleteBrand(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -61,7 +61,23 @@ public class BrandService {
         brandMapper.insertSelective(brand);
         // 新增品牌和分类中间表
         for (Long cid : cids) {
-            this.brandMapper.insertCategoryBrand(cid, brand.getId());
+            brandMapper.insertCategoryBrandId(cid, brand.getId());
         }
+    }
+
+    public void editBrand(Brand brand, List<Long> cids) {
+        Example example = new Example(Brand.class);
+        brandMapper.updateByPrimaryKeySelective(brand);
+        // 删除中间表数据
+        brandMapper.deleteCategoryByBrandId(brand.getId());
+        for (Long cid : cids) {
+            brandMapper.insertCategoryBrandId(cid, brand.getId());
+        }
+    }
+
+    public void deleteBrand(Long id) {
+        brandMapper.deleteByPrimaryKey(id);
+        // 删除中间表数据
+        brandMapper.deleteCategoryByBrandId(id);
     }
 }
