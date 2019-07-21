@@ -1,6 +1,7 @@
 package com.leyou.item.web;
 
 import com.leyou.item.pojo.SpecGroup;
+import com.leyou.item.pojo.SpecParam;
 import com.leyou.item.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,12 @@ public class SpecificationController {
     @RequestMapping("groups/{cid}")
     public ResponseEntity<List<SpecGroup>> findSpecGroupByCid(@PathVariable("cid") Long cid) {
         List<SpecGroup> list = specificationService.findSpecGroupByCid(cid);
+        return ResponseEntity.ok(list);
+    }
+
+    @RequestMapping("params/{gid}")
+    public ResponseEntity<List<SpecParam>> findSpecParamByGid(@PathVariable("gid") Long gid) {
+        List<SpecParam> list = specificationService.findSpecParamByGid(gid);
         return ResponseEntity.ok(list);
     }
 }

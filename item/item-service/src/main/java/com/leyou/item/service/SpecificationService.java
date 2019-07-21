@@ -5,6 +5,7 @@ import com.leyou.common.exceptions.CustomException;
 import com.leyou.item.mapper.SpecGroupMapper;
 import com.leyou.item.mapper.SpecParamMapper;
 import com.leyou.item.pojo.SpecGroup;
+import com.leyou.item.pojo.SpecParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -25,8 +26,18 @@ public class SpecificationService {
         specGroup.setCid(cid);
         List<SpecGroup> specGroupList = specGroupMapper.select(specGroup);
         if (CollectionUtils.isEmpty(specGroupList)) {
-            throw new CustomException(ExceptionEnum.SPEC_GROUP_NOT_FOND);
+            throw new CustomException(ExceptionEnum.SPEC_GROUP_NOT_FOUND);
         }
         return specGroupList;
+    }
+
+    public List<SpecParam> findSpecParamByGid(Long gid) {
+        SpecParam specParam = new SpecParam();
+        specParam.setGroupId(gid);
+        List<SpecParam> specParamList = specParamMapper.select(specParam);
+        if (CollectionUtils.isEmpty(specParamList)) {
+            throw new CustomException(ExceptionEnum.SPEC_PARAM_NOT_FOUND);
+        }
+        return specParamList;
     }
 }
