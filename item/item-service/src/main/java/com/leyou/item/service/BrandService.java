@@ -88,4 +88,12 @@ public class BrandService {
         }
         return brand;
     }
+
+    public List<Brand> getBrandListByCid(Long cid) {
+        List<Brand> brandList = brandMapper.getBrandListByCid(cid);
+        if (CollectionUtils.isEmpty(brandList)) {
+            throw new CustomException(ExceptionEnum.BRAND_NOT_FOND);
+        }
+        return brandList;
+    }
 }
