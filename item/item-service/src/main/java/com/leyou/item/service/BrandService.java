@@ -80,4 +80,12 @@ public class BrandService {
         // 删除中间表数据
         brandMapper.deleteCategoryByBrandId(id);
     }
+
+    public Brand selectById(Long id) {
+        Brand brand = brandMapper.selectByPrimaryKey(id);
+        if (brand == null) {
+            throw new CustomException(ExceptionEnum.BRAND_NOT_FOND);
+        }
+        return brand;
+    }
 }

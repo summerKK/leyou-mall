@@ -10,6 +10,8 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class CategoryService {
 
@@ -32,5 +34,17 @@ public class CategoryService {
             throw new CustomException(ExceptionEnum.CATEGORY_NOT_FOUND);
         }
         return categoryList;
+    }
+
+    public String getCategoryNameByIds(List<Long> ids) {
+        List<String> stringList = categoryMapper
+                .selectByIdList(ids)
+                .stream()
+                .map(Category::getName)
+                .collect(toList());
+        if (CollectionUtils.isEmpty(stringList)) {
+            throw new CustomException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+        return String.join("/", stringList);
     }
 }
