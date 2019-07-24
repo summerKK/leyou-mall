@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,9 +25,13 @@ public class SpecificationController {
         return ResponseEntity.ok(list);
     }
 
-    @RequestMapping("params/{gid}")
-    public ResponseEntity<List<SpecParam>> findSpecParamByGid(@PathVariable("gid") Long gid) {
-        List<SpecParam> list = specificationService.findSpecParamByGid(gid);
+    @RequestMapping("params")
+    public ResponseEntity<List<SpecParam>> findSpecParamList(
+            @RequestParam(value = "gid", required = false) Long gid,
+            @RequestParam(value = "cid", required = false) Long cid,
+            @RequestParam(value = "searching", required = false) Boolean searching
+    ) {
+        List<SpecParam> list = specificationService.findSpecParamList(gid, cid, searching);
         return ResponseEntity.ok(list);
     }
 }
