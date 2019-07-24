@@ -14,7 +14,8 @@ public enum ExceptionEnum {
     SPEC_GROUP_NOT_FOUND(404, "分组不存在"),
     SPEC_PARAM_NOT_FOUND(404, "规格参数不存在"),
     IMAGE_UPLOAD_INVALID_TYPE(500, "上传失败，文件类型不匹配"),
-    IMAGE_UPLOAD_INVALID_CONTENT(500, "上传失败，文件内容不符合要求");
+    IMAGE_UPLOAD_INVALID_CONTENT(500, "上传失败，文件内容不符合要求"),
+    GOODS_SAVE_ERROR(500, "商品插入失败");
     private int code;
     private String msg;
 }

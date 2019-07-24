@@ -4,19 +4,17 @@ import com.leyou.common.pojo.PageResult;
 import com.leyou.item.pojo.Spu;
 import com.leyou.item.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("spu")
 public class GoodsController {
 
     @Autowired
     GoodsService goodsService;
 
-    @RequestMapping("list")
+    @GetMapping("spu/list")
     public ResponseEntity<PageResult<Spu>> list(
             @RequestParam(value = "key", required = false) String key,
             @RequestParam(value = "saleable", defaultValue = "false") Boolean saleable,
@@ -25,5 +23,11 @@ public class GoodsController {
 
         PageResult<Spu> list = goodsService.list(key, saleable, page, rows);
         return ResponseEntity.ok(list);
+    }
+
+    @PostMapping("goods")
+    public ResponseEntity<Void> addGoods(@RequestBody Spu spu) {
+        goodsService.addGoods(spu);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
